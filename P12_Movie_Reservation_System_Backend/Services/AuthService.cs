@@ -13,12 +13,12 @@ namespace P12_Movie_Reservation_System_Backend.Services;
 public class AuthService : IAuthService
 {
     private readonly ApplicationDbContext _context;
-    private readonly JwtTokenGenerator _jwtTokenGenerator;
+    private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly ILogger<AuthService> _logger;
 
     public AuthService(
         ApplicationDbContext context,
-        JwtTokenGenerator jwtTokenGenerator,
+        IJwtTokenGenerator jwtTokenGenerator,
         ILogger<AuthService> logger)
     {
         _context = context;

@@ -5,6 +5,7 @@ using P12_Movie_Reservation_System_Backend.Configurations;
 using P12_Movie_Reservation_System_Backend.Data.ApplicationDbContext;
 using P12_Movie_Reservation_System_Backend.Helpers;
 using P12_Movie_Reservation_System_Backend.Interfaces;
+using P12_Movie_Reservation_System_Backend.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,6 +53,8 @@ builder.Services.Configure<JwtSettings>(
     builder.Configuration.GetSection("Jwt"));
 
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
