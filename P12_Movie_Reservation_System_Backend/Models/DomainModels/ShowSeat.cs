@@ -1,18 +1,28 @@
-﻿namespace P12_Movie_Reservation_System_Backend.Models.DomainModels
+﻿using System.ComponentModel.DataAnnotations;
+using P12_Movie_Reservation_System_Backend.Enums;
+
+namespace P12_Movie_Reservation_System_Backend.Models.DomainModels;
+
+public class ShowSeat
 {
-    public class ShowSeat
-    {
-        public int ShowSeatId { get; set; }
+    [Key]
+    public int ShowSeatId { get; set; }
 
-        public int ShowId { get; set; }
-        public Show Show { get; set; }
+    // Foreign Key
+    [Required]
+    public int ShowId { get; set; }
 
-        public int SeatId { get; set; }
-        public Seat Seat { get; set; }
+    public Show Show { get; set; } = null!;
 
-        public string Status { get; set; }
-        // Available, Reserved, Booked
+    // Foreign Key
+    [Required]
+    public int SeatId { get; set; }
 
-        public ICollection<BookingSeat> BookingSeats { get; set; }
-    }
+    public Seat Seat { get; set; } = null!;
+
+    [Required]
+    public ShowSeatStatus Status { get; set; } = ShowSeatStatus.Available;
+
+    // Navigation Property
+    public ICollection<BookingSeat> BookingSeats { get; set; } = new List<BookingSeat>();
 }

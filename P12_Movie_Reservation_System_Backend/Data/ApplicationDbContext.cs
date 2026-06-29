@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using P12_Movie_Reservation_System_Backend.Models.DomainModels;
 using P12_Movie_Reservation_System_Backend.Models.JunctionModels;
+using P12_Movie_Reservation_System_Backend.Enums;
 
 namespace P12_Movie_Reservation_System_Backend.Data.ApplicationDbContext;
 
@@ -39,6 +40,16 @@ public class ApplicationDbContext : DbContext
         // ============================================================
         modelBuilder.Entity<MovieActor>()
             .HasKey(ma => new { ma.MovieId, ma.ActorId });
+
+        modelBuilder.Entity<MovieActor>()
+            .HasOne(ma => ma.Movie)
+            .WithMany(m => m.MovieActors)
+            .HasForeignKey(ma => ma.MovieId);
+
+        modelBuilder.Entity<MovieActor>()
+            .HasOne(ma => ma.Actor)
+            .WithMany(a => a.MovieActors)
+            .HasForeignKey(ma => ma.ActorId);
 
         // ============================================================
         // User -> Bookings
@@ -160,8 +171,16 @@ public class ApplicationDbContext : DbContext
             .HasIndex(p => p.TransactionId)
             .IsUnique();
 
+        modelBuilder.Entity<Payment>()
+            .HasIndex(p => p.BookingId)
+            .IsUnique();
+
         modelBuilder.Entity<Ticket>()
-            .HasIndex(t => t.Number)
+            .HasIndex(t => t.TicketNumber)
+            .IsUnique();
+
+        modelBuilder.Entity<Ticket>()
+            .HasIndex(t => t.BookingId)
             .IsUnique();
 
         modelBuilder.Entity<Seat>()
@@ -171,5 +190,78 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<ShowSeat>()
             .HasIndex(ss => new { ss.ShowId, ss.SeatId })
             .IsUnique();
+
+        modelBuilder.Entity<Show>()
+            .HasIndex(s => new
+            {
+                s.ScreenId,
+                s.ShowDateTime
+            })
+            .IsUnique();
+
+        modelBuilder.Entity<BookingSeat>()
+            .HasIndex(bs => new { bs.BookingId, bs.ShowSeatId })
+            .IsUnique();
+
+        modelBuilder.Entity<Screen>()
+            .HasIndex(s => new { s.TheaterId, s.ScreenName })
+            .IsUnique();
+
+        modelBuilder.Entity<Theater>()
+            .HasIndex(t => new
+            {
+                t.TheaterName,
+                t.Location
+            })
+            .IsUnique();
+
+        modelBuilder.Entity<User>()
+            .Property(u => u.Role)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<Booking>()
+            .Property(b => b.Status)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<Payment>()
+            .Property(p => p.Status)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<Payment>()
+            .Property(p => p.PaymentMethod)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<Seat>()
+            .Property(s => s.Type)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<ShowSeat>()
+            .Property(ss => ss.Status)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<Booking>()
+            .Property(b => b.TotalAmount)
+            .HasPrecision(10, 2);
+
+        modelBuilder.Entity<Payment>()
+            .Property(p => p.Amount)
+            .HasPrecision(10, 2);
+
+        modelBuilder.Entity<User>()
+            .Property(u => u.Role)
+            .HasDefaultValue(Role.Customer);
+
+        modelBuilder.Entity<Booking>()
+            .Property(b => b.BookingDate)
+            .HasDefaultValueSql("GETUTCDATE()");
+
+        modelBuilder.Entity<Payment>()
+            .Property(p => p.PaymentDate)
+            .HasDefaultValueSql("GETUTCDATE()");
+
+        modelBuilder.Entity<Ticket>()
+            .Property(t => t.GeneratedAt)
+            .HasDefaultValueSql("GETUTCDATE()");
+
     }
 }
