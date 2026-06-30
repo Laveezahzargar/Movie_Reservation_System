@@ -56,6 +56,8 @@ builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+builder.Services.AddScoped<IMovieService, MovieService>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

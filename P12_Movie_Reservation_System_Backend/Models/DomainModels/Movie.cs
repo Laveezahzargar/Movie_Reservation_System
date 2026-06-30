@@ -13,7 +13,7 @@ public class Movie
     public string Title { get; set; } = string.Empty;
 
     [Required]
-    [StringLength(2000)]
+    [StringLength(2000, MinimumLength = 10)]
     public string Description { get; set; } = string.Empty;
 
     [Required]
@@ -28,7 +28,7 @@ public class Movie
     [DataType(DataType.Date)]
     public DateTime ReleaseDate { get; set; }
 
+    // Navigation properties
     public ICollection<Show> Shows { get; set; } = new List<Show>();
-
     public ICollection<MovieActor> MovieActors { get; set; } = new List<MovieActor>();
 }
