@@ -58,6 +58,22 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddScoped<IMovieService, MovieService>();
 
+builder.Services.AddScoped<IActorService, ActorService>();
+
+builder.Services.AddScoped<ITheaterService, TheaterService>();
+
+builder.Services.AddScoped<IScreenService, ScreenService>();
+
+builder.Services.AddScoped<ISeatService, SeatService>();
+
+builder.Services.AddScoped<IShowService, ShowService>();
+
+builder.Services.AddScoped<IBookingService, BookingService>();
+
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+
+builder.Services.AddScoped<ITicketService, TicketService>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
