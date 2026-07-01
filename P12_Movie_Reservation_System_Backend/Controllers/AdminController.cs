@@ -10,7 +10,6 @@ namespace P12_Movie_Reservation_System_Backend.Controllers;
 public class AdminController : ControllerBase
 {
     private readonly IAdminService _adminService;
-
     public AdminController(IAdminService adminService)
     {
         _adminService = adminService;
