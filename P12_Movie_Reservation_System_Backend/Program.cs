@@ -74,6 +74,8 @@ builder.Services.AddScoped<IPaymentService, PaymentService>();
 
 builder.Services.AddScoped<ITicketService, TicketService>();
 
+builder.Services.AddScoped<IAdminService, AdminService>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
