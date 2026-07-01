@@ -1,0 +1,1569 @@
+{
+  "info": {
+    "_postman_id": "b3b9a998-86d4-4bf1-8fb2-8764e766bb4f",
+    "name": "Movie_Reservation_System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55864067",
+    "_collection_link": "https://go.postman.co/collection/55864067-b3b9a998-86d4-4bf1-8fb2-8764e766bb4f?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "P12_Movie_Reservation_System_Backend",
+      "item": [
+        {
+          "name": "Auth",
+          "item": [
+            {
+              "name": "Register",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Taliqa\",\r\n    \"email\":\"taliqarounaq8@gmail.com\",\r\n    \"password\":\"#Reno123\",\r\n    \"confirmpassword\":\"#Reno123\"\r\n\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5146/api/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Login",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\":\"laveezah.renosoftwares@outlook.com\",\r\n    \"password\":\"#Reno123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5146/api/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Movie",
+          "item": [
+            {
+              "name": "Add Movie",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiJlNWQ3MDljNS04OGVjLTRlNmItYWJhZC1jNmRmOGFjZDk2YTAiLCJleHAiOjE3ODI4MDEwODcsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.2uQ1z3qiwuOQSkf__lc1Gc-bbI1WBSa0DQ0qqDh8Ocg",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"The Chronicles of Narnia: The Lion, the Witch and the Wardrobe\",\r\n  \"description\": \"Four siblings discover a magical world called Narnia through a wardrobe, where they join forces with Aslan to defeat the White Witch and restore peace to the land.\",\r\n  \"duration\": 143,\r\n  \"genre\": \"Fantasy, Adventure\",\r\n  \"releaseDate\": \"2005-12-09T00:00:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5146/api/movies",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Movie",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiJlNWQ3MDljNS04OGVjLTRlNmItYWJhZC1jNmRmOGFjZDk2YTAiLCJleHAiOjE3ODI4MDEwODcsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.2uQ1z3qiwuOQSkf__lc1Gc-bbI1WBSa0DQ0qqDh8Ocg",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"Event Horizon\",\r\n  \"description\": \"A rescue crew investigates a spaceship that disappeared during its experimental faster-than-light travel and returned with a terrifying unknown presence from another dimension.\",\r\n  \"duration\": 96,\r\n  \"genre\": \"Sci-Fi, Horror, Psychological\",\r\n  \"releaseDate\": \"1997-08-15T00:00:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5146/api/movies/9",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "movies",
+                    "9"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Movies",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiJlNWQ3MDljNS04OGVjLTRlNmItYWJhZC1jNmRmOGFjZDk2YTAiLCJleHAiOjE3ODI4MDEwODcsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.2uQ1z3qiwuOQSkf__lc1Gc-bbI1WBSa0DQ0qqDh8Ocg",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"Harry Potter and the Sorcerer's Stone\",\r\n  \"description\": \"A young boy discovers he is a wizard and begins his first year at Hogwarts School of Witchcraft and Wizardry, where he uncovers the truth about his past and a dark force tied to a mysterious stone.\",\r\n  \"duration\": 152,\r\n  \"genre\": \"Fantasy, Adventure\",\r\n  \"releaseDate\": \"2001-11-16T00:00:00\"\r\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:5146/api/movies",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Movie By Id",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiJlNWQ3MDljNS04OGVjLTRlNmItYWJhZC1jNmRmOGFjZDk2YTAiLCJleHAiOjE3ODI4MDEwODcsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.2uQ1z3qiwuOQSkf__lc1Gc-bbI1WBSa0DQ0qqDh8Ocg",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"Harry Potter and the Sorcerer's Stone\",\r\n  \"description\": \"A young boy discovers he is a wizard and begins his first year at Hogwarts School of Witchcraft and Wizardry, where he uncovers the truth about his past and a dark force tied to a mysterious stone.\",\r\n  \"duration\": 152,\r\n  \"genre\": \"Fantasy, Adventure\",\r\n  \"releaseDate\": \"2001-11-16T00:00:00\"\r\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:5146/api/movies/2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "movies",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Movie",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIxYjM4MDE2OC01YjVkLTRlMmUtOThhYy02ZTExYzJiM2VkZWUiLCJleHAiOjE3ODI4MDIwOTQsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.z_R1NKWkQYBRAxqpBPcbF2XP985O71XE3ASqZXjP_sE",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/movies/8",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "movies",
+                    "8"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Actor",
+          "item": [
+            {
+              "name": "Add Actor",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIxYzYxMTcwYy1lNDY5LTQ0NjUtYjMwMy1kYTJiMWE1NWJlODgiLCJleHAiOjE3ODI4MTc5MjksImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.Oa0ZJdxZ2lEFlcr9cFfXDptlt1oyCBNmxnDJYLYZLJ8",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Tom Cruise\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5146/api/actors",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "actors"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Actor",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIxYzYxMTcwYy1lNDY5LTQ0NjUtYjMwMy1kYTJiMWE1NWJlODgiLCJleHAiOjE3ODI4MTc5MjksImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.Oa0ZJdxZ2lEFlcr9cFfXDptlt1oyCBNmxnDJYLYZLJ8",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Tom Cruise\"\r\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:5146/api/actors",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "actors"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get movies by Actor Id",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIxYzYxMTcwYy1lNDY5LTQ0NjUtYjMwMy1kYTJiMWE1NWJlODgiLCJleHAiOjE3ODI4MTc5MjksImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.Oa0ZJdxZ2lEFlcr9cFfXDptlt1oyCBNmxnDJYLYZLJ8",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Tom Cruise\"\r\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:5146/api/actors/1/movies",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "actors",
+                    "1",
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Theater",
+          "item": [
+            {
+              "name": "Create Theater",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIzYmEwZjY5MC01ZTI4LTQ1YTktYjVkNC1iNjdjNWMwNmQxNTIiLCJleHAiOjE3ODI4ODQ0NzgsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.bOcs_tl1XQdfl1Gmyv8FP-M64hIly2EirizqkCCwo1U",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"theaterName\": \"INOX Srinagar\",\r\n  \"location\": \"Lal Chowk, Srinagar, Jammu & Kashmir\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5146/api/theaters",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "theaters"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Theaters",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIzYmEwZjY5MC01ZTI4LTQ1YTktYjVkNC1iNjdjNWMwNmQxNTIiLCJleHAiOjE3ODI4ODQ0NzgsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.bOcs_tl1XQdfl1Gmyv8FP-M64hIly2EirizqkCCwo1U",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/theaters",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "theaters"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Screens by TheaterId",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIzYmEwZjY5MC01ZTI4LTQ1YTktYjVkNC1iNjdjNWMwNmQxNTIiLCJleHAiOjE3ODI4ODQ0NzgsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.bOcs_tl1XQdfl1Gmyv8FP-M64hIly2EirizqkCCwo1U",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/theaters/1/screens",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "theaters",
+                    "1",
+                    "screens"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Screen",
+          "item": [
+            {
+              "name": "Create Screen",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIzYmEwZjY5MC01ZTI4LTQ1YTktYjVkNC1iNjdjNWMwNmQxNTIiLCJleHAiOjE3ODI4ODQ0NzgsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.bOcs_tl1XQdfl1Gmyv8FP-M64hIly2EirizqkCCwo1U",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"screenName\": \"RDX-044\",\r\n  \"theaterId\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5146/api/screens",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "screens"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Screen",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIzYmEwZjY5MC01ZTI4LTQ1YTktYjVkNC1iNjdjNWMwNmQxNTIiLCJleHAiOjE3ODI4ODQ0NzgsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.bOcs_tl1XQdfl1Gmyv8FP-M64hIly2EirizqkCCwo1U",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"screenName\": \"Dolby-Cinema\",\r\n  \"theaterId\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5146/api/screens/2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "screens",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Screen",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIzYmEwZjY5MC01ZTI4LTQ1YTktYjVkNC1iNjdjNWMwNmQxNTIiLCJleHAiOjE3ODI4ODQ0NzgsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.bOcs_tl1XQdfl1Gmyv8FP-M64hIly2EirizqkCCwo1U",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/screens/3",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "screens",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Screens",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIzYmEwZjY5MC01ZTI4LTQ1YTktYjVkNC1iNjdjNWMwNmQxNTIiLCJleHAiOjE3ODI4ODQ0NzgsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.bOcs_tl1XQdfl1Gmyv8FP-M64hIly2EirizqkCCwo1U",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/screens",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "screens"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Screen By Id",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIzYmEwZjY5MC01ZTI4LTQ1YTktYjVkNC1iNjdjNWMwNmQxNTIiLCJleHAiOjE3ODI4ODQ0NzgsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.bOcs_tl1XQdfl1Gmyv8FP-M64hIly2EirizqkCCwo1U",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/screens/2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "screens",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Seats By ScreenId",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIzYmEwZjY5MC01ZTI4LTQ1YTktYjVkNC1iNjdjNWMwNmQxNTIiLCJleHAiOjE3ODI4ODQ0NzgsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.bOcs_tl1XQdfl1Gmyv8FP-M64hIly2EirizqkCCwo1U",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/screens/1/seats",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "screens",
+                    "1",
+                    "seats"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Shows By ScreenId",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:5146/api/screens/2/shows",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "screens",
+                    "2",
+                    "shows"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Seat",
+          "item": [
+            {
+              "name": "Create Seat",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiJjNGJiMDUzZS03NjA0LTQ5MjktYmJkZS03YWMzOTNkNjBmMTQiLCJleHAiOjE3ODI4ODY1NTMsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.BfVImDQ2kLBvzXFmAebc41hu_PYb8Ah3secp-wYhM5g",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"number\": \"A1\",\r\n  \"type\": \"Regular\",\r\n  \"screenId\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5146/api/seats",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "seats"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Show",
+          "item": [
+            {
+              "name": "Create Show",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiJjNGJiMDUzZS03NjA0LTQ5MjktYmJkZS03YWMzOTNkNjBmMTQiLCJleHAiOjE3ODI4ODY1NTMsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.BfVImDQ2kLBvzXFmAebc41hu_PYb8Ah3secp-wYhM5g",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"movieId\": 1,\r\n  \"screenId\": 1,\r\n  \"showDateTime\": \"2026-08-05T18:30:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5146/api/shows",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "shows"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Shows",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiJjNGJiMDUzZS03NjA0LTQ5MjktYmJkZS03YWMzOTNkNjBmMTQiLCJleHAiOjE3ODI4ODY1NTMsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.BfVImDQ2kLBvzXFmAebc41hu_PYb8Ah3secp-wYhM5g",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/shows",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "shows"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Available-seats By ShowId",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiJjNGJiMDUzZS03NjA0LTQ5MjktYmJkZS03YWMzOTNkNjBmMTQiLCJleHAiOjE3ODI4ODY1NTMsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.BfVImDQ2kLBvzXFmAebc41hu_PYb8Ah3secp-wYhM5g",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/shows/1/available-seats",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "shows",
+                    "1",
+                    "available-seats"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Booking",
+          "item": [
+            {
+              "name": "Create Booking",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiJhNmEzZmZmNi05MTA0LTRlM2QtOWMxMS0wYmUxMmIyZTM4MzUiLCJleHAiOjE3ODI4OTI1MTUsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.lUj6XRVJecdOTMPCYLNZc3s8YNd0AN2-2H9qNWKImHE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"showId\": 3,\r\n  \"showSeatIds\": [44]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5146/api/bookings",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All My Bookings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiJhNmEzZmZmNi05MTA0LTRlM2QtOWMxMS0wYmUxMmIyZTM4MzUiLCJleHAiOjE3ODI4OTI1MTUsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.lUj6XRVJecdOTMPCYLNZc3s8YNd0AN2-2H9qNWKImHE",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/bookings/my-bookings",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "bookings",
+                    "my-bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Booking By Id",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiJhNmEzZmZmNi05MTA0LTRlM2QtOWMxMS0wYmUxMmIyZTM4MzUiLCJleHAiOjE3ODI4OTI1MTUsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.lUj6XRVJecdOTMPCYLNZc3s8YNd0AN2-2H9qNWKImHE",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/bookings/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "bookings",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Booking",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiJhNmEzZmZmNi05MTA0LTRlM2QtOWMxMS0wYmUxMmIyZTM4MzUiLCJleHAiOjE3ODI4OTI1MTUsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.lUj6XRVJecdOTMPCYLNZc3s8YNd0AN2-2H9qNWKImHE",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/bookings/2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "bookings",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Payment",
+          "item": [
+            {
+              "name": "Create Payment",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIwZWE1NGNiOC0xZjhmLTQxNzgtYWEwYy02OWFlZjJlZTZiYzAiLCJleHAiOjE3ODI4OTMyODAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.qX-bhhb6BRA-5XmK7SDWupuzEbZwH77nkFNW_RyAY6k",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"bookingId\": 3,\r\n  \"amount\": 750,\r\n  \"paymentMethod\": 3\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5146/api/payments/process",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "payments",
+                    "process"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Paymets By PayId",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIwZWE1NGNiOC0xZjhmLTQxNzgtYWEwYy02OWFlZjJlZTZiYzAiLCJleHAiOjE3ODI4OTMyODAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.qX-bhhb6BRA-5XmK7SDWupuzEbZwH77nkFNW_RyAY6k",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/payments/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "payments",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Verify Payments By Id",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIwZWE1NGNiOC0xZjhmLTQxNzgtYWEwYy02OWFlZjJlZTZiYzAiLCJleHAiOjE3ODI4OTMyODAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.qX-bhhb6BRA-5XmK7SDWupuzEbZwH77nkFNW_RyAY6k",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/payments/verify/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "payments",
+                    "verify",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Ticket",
+          "item": [
+            {
+              "name": "Get Ticket Of BookingId",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIwZWE1NGNiOC0xZjhmLTQxNzgtYWEwYy02OWFlZjJlZTZiYzAiLCJleHAiOjE3ODI4OTMyODAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.qX-bhhb6BRA-5XmK7SDWupuzEbZwH77nkFNW_RyAY6k",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/tickets/2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "tickets",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Download Ticklet From BookingId",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiIwZWE1NGNiOC0xZjhmLTQxNzgtYWEwYy02OWFlZjJlZTZiYzAiLCJleHAiOjE3ODI4OTMyODAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.qX-bhhb6BRA-5XmK7SDWupuzEbZwH77nkFNW_RyAY6k",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/tickets/2/download",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "tickets",
+                    "2",
+                    "download"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Admin",
+          "item": [
+            {
+              "name": "Get Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/dashboard",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "dashboard"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Total Revenue",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/revenue",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "revenue"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Today's Revenue",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/revenue/today",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "revenue",
+                    "today"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Total Bookings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/bookings/count",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "bookings",
+                    "count"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Total Movies",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/movies/count",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "movies",
+                    "count"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Total Users",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/users/count",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "users",
+                    "count"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Total Screens",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/screens/count",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "screens",
+                    "count"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Total Seats",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/seats/count",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "seats",
+                    "count"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Today's Booking-Count",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/bookings/today",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "bookings",
+                    "today"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Recent Bookings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/recent-bookings",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "recent-bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Popular Movies",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/popular-movies",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "popular-movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Upcoming Shows",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/upcoming-shows",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "upcoming-shows"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Average Ticket Price",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/average-ticket-price",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "average-ticket-price"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Occupancy",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/occupancy",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "occupancy"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Top Customers",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/top-customers",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "top-customers"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Recent Payments",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/recent-payments",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "recent-payments"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Payment Statistics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/payment-statistics",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "payment-statistics"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Total Theaters",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiZW1haWwiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImxhdmVlemFoIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJqdGkiOiI4NWViMzJhNC0yMmM1LTRjOWUtYWM4My0xMjUyMDBlYmMxOWQiLCJleHAiOjE3ODI5MDAwOTAsImlzcyI6Ik1vdmllUmVzZXJ2YXRpb25TeXN0ZW0iLCJhdWQiOiJNb3ZpZVJlc2VydmF0aW9uU3lzdGVtVXNlcnMifQ.v9JJtX4y_5N-mwD-JArFxmSIZs8z62fJY6x8XiM9fR4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5146/api/admin/theaters/count",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5146",
+                  "path": [
+                    "api",
+                    "admin",
+                    "theaters",
+                    "count"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
