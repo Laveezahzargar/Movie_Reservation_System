@@ -5,8 +5,16 @@ using P12_Movie_Reservation_System_Backend.Configurations;
 using P12_Movie_Reservation_System_Backend.Data.ApplicationDbContext;
 using P12_Movie_Reservation_System_Backend.Helpers;
 using P12_Movie_Reservation_System_Backend.Interfaces;
+using P12_Movie_Reservation_System_Backend.Middlewares;
 using P12_Movie_Reservation_System_Backend.Services;
+using Serilog;
 using System.Text;
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .Build())
+    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +25,8 @@ var jwtSettings =
 
 if (jwtSettings == null)
     throw new Exception("Jwt configuration is missing");
+
+//builder.Host.UseSerilog();
 
 builder.Services
 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -43,7 +53,10 @@ builder.Services
 builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
-builder.Services.AddOpenApi();
+
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
@@ -80,12 +93,20 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.MapGet("/", () => "P12 Movie Reservation System Backend API is running successfully.");
 
 app.UseHttpsRedirection();
 
+//app.UseSerilogRequestLogging();
+
+//app.UseGlobalExceptionMiddleware();
+
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();

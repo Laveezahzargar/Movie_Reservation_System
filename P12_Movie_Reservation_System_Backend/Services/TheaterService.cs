@@ -10,14 +10,18 @@ namespace P12_Movie_Reservation_System_Backend.Services;
 public class TheaterService : ITheaterService
 {
     private readonly ApplicationDbContext _context;
+    private readonly ILogger<TheaterService> _logger;
 
-    public TheaterService(ApplicationDbContext context)
+    public TheaterService(ApplicationDbContext context, ILogger<TheaterService> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
     public async Task<ApiResponse<List<TheaterListDto>>> GetAllTheatersAsync()
     {
+        _logger.LogInformation("Fetching all theaters.");
+
         var theaters = await _context.Theaters.ToListAsync();
 
         var result = theaters.Select(t => new TheaterListDto
@@ -27,12 +31,21 @@ public class TheaterService : ITheaterService
             Location = t.Location
         }).ToList();
 
+        _logger.LogInformation(
+            "Retrieved {TheaterCount} theaters successfully.",
+            result.Count);
+
         return ApiResponse<List<TheaterListDto>>
             .SuccessResponse(result, "Theaters Retrieved Successfully");
     }
 
     public async Task<ApiResponse<TheaterDetailDto>> CreateTheaterAsync(CreateTheaterDto request)
     {
+        _logger.LogInformation(
+            "Creating theater '{TheaterName}' at location '{Location}'.",
+            request.TheaterName,
+            request.Location);
+
         var theater = new Theater
         {
             TheaterName = request.TheaterName,
@@ -41,6 +54,11 @@ public class TheaterService : ITheaterService
 
         await _context.Theaters.AddAsync(theater);
         await _context.SaveChangesAsync();
+
+        _logger.LogInformation(
+            "Theater created successfully. TheaterId: {TheaterId}, TheaterName: {TheaterName}.",
+            theater.TheaterId,
+            theater.TheaterName);
 
         return ApiResponse<TheaterDetailDto>.SuccessResponse(
             new TheaterDetailDto
@@ -54,12 +72,22 @@ public class TheaterService : ITheaterService
 
     public async Task<ApiResponse<List<TheaterScreenDto>>> GetTheaterScreensAsync(int theaterId)
     {
+        _logger.LogInformation(
+            "Fetching screens for TheaterId {TheaterId}.",
+            theaterId);
+
         var theaterExists = await _context.Theaters
             .AnyAsync(t => t.TheaterId == theaterId);
 
         if (!theaterExists)
+        {
+            _logger.LogWarning(
+                "Theater with TheaterId {TheaterId} was not found.",
+                theaterId);
+
             return ApiResponse<List<TheaterScreenDto>>
                 .FailureResponse("Theater not found");
+        }
 
         var screens = await _context.Screens
             .Where(s => s.TheaterId == theaterId)
@@ -70,6 +98,11 @@ public class TheaterService : ITheaterService
                 Capacity = s.Seats.Count(),
             })
             .ToListAsync();
+
+        _logger.LogInformation(
+            "Retrieved {ScreenCount} screens for TheaterId {TheaterId}.",
+            screens.Count,
+            theaterId);
 
         return ApiResponse<List<TheaterScreenDto>>
             .SuccessResponse(screens, "Screens Retrieved Successfully");
