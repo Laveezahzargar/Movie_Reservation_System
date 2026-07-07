@@ -256,7 +256,7 @@ public class ScreenService : IScreenService
             .Select(s => new ScreenShowDto
             {
                 ShowId = s.ShowId,
-                MovieId = s.MovieId,
+                MovieId = (int)s.MovieId,
                 ShowTime = s.ShowDateTime
             })
             .ToListAsync();

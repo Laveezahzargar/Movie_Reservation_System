@@ -31,6 +31,14 @@ public class Booking
     public int ShowId { get; set; }
 
     public Show Show { get; set; } = null!;
+    public int MovieId { get; set; }
+    public Movie Movie { get; set; }
+
+    public int TheaterId { get; set; }
+    public Theater Theater { get; set; }
+
+    public int ScreenId { get; set; }
+    public Screen Screen { get; set; }
 
     // One-to-One
     public Payment? Payment { get; set; }

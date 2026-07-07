@@ -23,14 +23,27 @@ public class ShowService : IShowService
     {
         _logger.LogInformation("Fetching all shows.");
 
-        var shows = await _context.Shows.ToListAsync();
+        var shows = await _context.Shows
+            .Include(s => s.Movie)
+            .Include(s => s.Screen)
+                .ThenInclude(sc => sc.Theater)
+            .ToListAsync();
 
         var result = shows.Select(s => new ShowListDto
         {
             ShowId = s.ShowId,
-            MovieId = s.MovieId,
-            ScreenId = s.ScreenId,
+
+            MovieId = (int)s.MovieId,
+            MovieTitle = s.Movie.Title,
+
+            TheaterId = s.Screen.Theater.TheaterId,
+            TheaterName = s.Screen.Theater.TheaterName,
+
+            ScreenId = (int)s.ScreenId,
+            ScreenName = s.Screen.ScreenName,
+
             ShowDateTime = s.ShowDateTime
+
         }).ToList();
 
         _logger.LogInformation(
@@ -85,6 +98,18 @@ public class ShowService : IShowService
         await _context.Shows.AddAsync(show);
         await _context.SaveChangesAsync();
 
+        await _context.Entry(show)
+    .Reference(s => s.Movie)
+    .LoadAsync();
+
+        await _context.Entry(show)
+            .Reference(s => s.Screen)
+            .LoadAsync();
+
+        await _context.Entry(show.Screen)
+            .Reference(s => s.Theater)
+            .LoadAsync();
+
         _logger.LogInformation(
             "Show created successfully. ShowId {ShowId}. Generating ShowSeats.",
             show.ShowId);
@@ -114,8 +139,8 @@ public class ShowService : IShowService
             new ShowDetailDto
             {
                 ShowId = show.ShowId,
-                MovieId = show.MovieId,
-                ScreenId = show.ScreenId,
+                MovieId = (int)show.MovieId,
+                ScreenId = (int)show.ScreenId,
                 ShowDateTime = show.ShowDateTime
             },
             "Show Created Successfully");
@@ -141,14 +166,15 @@ public class ShowService : IShowService
         }
 
         var seats = await _context.ShowSeats
-            .Where(ss => ss.ShowId == showId && ss.Status == ShowSeatStatus.Available)
+            .Where(ss => ss.ShowId == showId)
             .Select(ss => new AvailableSeatDto
             {
+                ShowSeatId = ss.ShowSeatId,
                 SeatId = ss.Seat.SeatId,
                 SeatNumber = ss.Seat.Number,
-                SeatType = ss.Seat.Type.ToString()
-            })
-            .ToListAsync();
+                SeatType = ss.Seat.Type.ToString(),
+                Status = ss.Status
+            }).ToListAsync();
 
         _logger.LogInformation(
             "Retrieved {AvailableSeatCount} available seats for ShowId {ShowId}.",

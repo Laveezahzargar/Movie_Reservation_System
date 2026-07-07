@@ -409,7 +409,7 @@ public class AdminService : IAdminService
             })
             .Select(g => new PopularMovieDto
             {
-                MovieId = g.Key.MovieId,
+                MovieId = (int)g.Key.MovieId,
                 Title = g.Key.Title,
                 BookingCount = g.Count()
             })

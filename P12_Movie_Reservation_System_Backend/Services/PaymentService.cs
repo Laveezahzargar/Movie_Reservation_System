@@ -20,7 +20,7 @@ public class PaymentService : IPaymentService
         _logger = logger;
     }
 
-    public async Task<ApiResponse<PaymentDetailDto>> ProcessPaymentAsync([FromBody] ProcessPaymentDto request)
+    public async Task<ApiResponse<PaymentDetailDto>> ProcessPaymentAsync( ProcessPaymentDto request)
     {
         _logger.LogInformation(
             "Processing payment for BookingId {BookingId}. Amount: {Amount}, PaymentMethod: {PaymentMethod}.",

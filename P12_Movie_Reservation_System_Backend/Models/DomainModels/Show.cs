@@ -11,16 +11,14 @@ public class Show
     public DateTime ShowDateTime { get; set; }
 
     // Foreign Key
-    [Required]
-    public int MovieId { get; set; }
+    public int? MovieId { get; set; }
+    public Movie? Movie { get; set; }
 
-    public Movie Movie { get; set; } = null!;
+    public int? TheaterId { get; set; }
+    public Theater? Theater { get; set; }
 
-    // Foreign Key
-    [Required]
-    public int ScreenId { get; set; }
-
-    public Screen Screen { get; set; } = null!;
+    public int? ScreenId { get; set; }
+    public Screen? Screen { get; set; }
 
     // Navigation Properties
     public ICollection<Booking> Bookings { get; set; } = new List<Booking>();

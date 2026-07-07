@@ -4,15 +4,19 @@ namespace P12_Movie_Reservation_System_Backend.DTOs.Show;
 
 public class ShowListDto
 {
-    [Required]
     public int ShowId { get; set; }
 
-    [Required]
     public int MovieId { get; set; }
 
-    [Required]
+    public string MovieTitle { get; set; } = "";
+
+    public int TheaterId { get; set; }
+
+    public string TheaterName { get; set; } = "";
+
     public int ScreenId { get; set; }
 
-    [Required]
+    public string ScreenName { get; set; } = "";
+
     public DateTime ShowDateTime { get; set; }
 }

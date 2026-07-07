@@ -3,7 +3,6 @@ using P12_Movie_Reservation_System_Backend.Common;
 using P12_Movie_Reservation_System_Backend.Data.ApplicationDbContext;
 using P12_Movie_Reservation_System_Backend.DTOs.Ticket;
 using P12_Movie_Reservation_System_Backend.Interfaces;
-using P12_Movie_Reservation_System_Backend.Models.DomainModels;
 
 namespace P12_Movie_Reservation_System_Backend.Services;
 
@@ -23,18 +22,31 @@ public class TicketService : ITicketService
         _logger.LogInformation("Fetching ticket for BookingId {BookingId}.", bookingId);
 
         var ticket = await _context.Tickets
+            .Include(t => t.Booking)
+                .ThenInclude(b => b.Show)
+                    .ThenInclude(s => s.Movie)
+
+            .Include(t => t.Booking)
+                .ThenInclude(b => b.Show)
+                    .ThenInclude(s => s.Theater)
+
+            .Include(t => t.Booking)
+                .ThenInclude(b => b.Show)
+                    .ThenInclude(s => s.Screen)
+
+            .Include(t => t.Booking)
+                .ThenInclude(b => b.BookingSeats)
+                    .ThenInclude(bs => bs.ShowSeat)
+                        .ThenInclude(ss => ss.Seat)
+
             .FirstOrDefaultAsync(t => t.BookingId == bookingId);
 
         if (ticket == null)
         {
-            _logger.LogWarning("No ticket found for BookingId {BookingId}.", bookingId);
             return ApiResponse<TicketDetailDto>.FailureResponse("Ticket not found");
         }
 
-        _logger.LogInformation(
-    "Ticket {TicketNumber} retrieved successfully for BookingId {BookingId}.",
-    ticket.TicketNumber,
-    bookingId);
+        var show = ticket.Booking.Show;
 
         return ApiResponse<TicketDetailDto>.SuccessResponse(new TicketDetailDto
         {
@@ -42,7 +54,21 @@ public class TicketService : ITicketService
             TicketNumber = ticket.TicketNumber,
             GeneratedAt = ticket.GeneratedAt,
             QRCodePath = ticket.QRCodePath,
-            BookingId = ticket.BookingId
+            BookingId = ticket.BookingId,
+
+            MovieTitle = show.Movie.Title,
+            TheaterName = show.Theater.TheaterName,
+            ScreenName = show.Screen.ScreenName,
+
+            // FIXED: your model uses ShowDateTime
+            ShowDate = show.ShowDateTime.ToString("dd MMM yyyy"),
+            ShowTime = show.ShowDateTime.ToString("hh:mm tt"),
+
+            Seats = string.Join(", ",
+                ticket.Booking.BookingSeats
+                    .Select(x => x.ShowSeat.Seat.Number)),
+
+            Amount = ticket.Booking.TotalAmount
         }, "Ticket retrieved successfully");
     }
 
@@ -51,20 +77,27 @@ public class TicketService : ITicketService
         _logger.LogInformation("Preparing ticket download for BookingId {BookingId}.", bookingId);
 
         var ticket = await _context.Tickets
+            .Include(t => t.Booking)
+                .ThenInclude(b => b.Show)
+                    .ThenInclude(s => s.Movie)
+            .Include(t => t.Booking)
+                .ThenInclude(b => b.Show)
+                    .ThenInclude(s => s.Theater)
+            .Include(t => t.Booking)
+                .ThenInclude(b => b.Show)
+                    .ThenInclude(s => s.Screen)
+            .Include(t => t.Booking)
+                .ThenInclude(b => b.BookingSeats)
+                    .ThenInclude(bs => bs.ShowSeat)
+                        .ThenInclude(ss => ss.Seat)
             .FirstOrDefaultAsync(t => t.BookingId == bookingId);
 
         if (ticket == null)
         {
-            _logger.LogWarning("Download failed. No ticket found for BookingId {BookingId}.", bookingId);
             return ApiResponse<string>.FailureResponse("Ticket not found");
         }
 
-        // Simulated download link (you can later replace with real PDF generation)
-        var downloadUrl = $"/tickets/download/{ticket.TicketNumber}.pdf";
-
-        _logger.LogInformation(
-    "Ticket download link generated successfully for TicketNumber {TicketNumber}.",
-    ticket.TicketNumber);
+        var downloadUrl = $"/api/tickets/{ticket.BookingId}/download";
 
         return ApiResponse<string>.SuccessResponse(downloadUrl, "Ticket download ready");
     }

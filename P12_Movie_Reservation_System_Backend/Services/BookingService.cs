@@ -75,6 +75,9 @@ public class BookingService : IBookingService
         {
             UserId = userId,
             ShowId = request.ShowId,
+            MovieId = show.MovieId!.Value,
+            TheaterId = show.TheaterId!.Value,
+            ScreenId = show.ScreenId!.Value,
             BookingDate = DateTime.UtcNow,
             Status = "Confirmed",
             TotalAmount = seatPrice * request.ShowSeatIds.Count
@@ -158,10 +161,15 @@ public class BookingService : IBookingService
             bookingId);
 
         var booking = await _context.Bookings
-            .Include(b => b.BookingSeats)
-                .ThenInclude(bs => bs.ShowSeat)
-                    .ThenInclude(ss => ss.Seat)
-            .FirstOrDefaultAsync(b => b.BookingId == bookingId);
+    .Include(b => b.Show)
+        .ThenInclude(s => s.Movie)
+    .Include(b => b.Show)
+        .ThenInclude(s => s.Screen)
+            .ThenInclude(sc => sc.Theater)
+    .Include(b => b.BookingSeats)
+        .ThenInclude(bs => bs.ShowSeat)
+            .ThenInclude(ss => ss.Seat)
+    .FirstOrDefaultAsync(b => b.BookingId == bookingId);
 
         if (booking == null)
         {
@@ -178,9 +186,16 @@ public class BookingService : IBookingService
             BookingId = booking.BookingId,
             UserId = booking.UserId,
             ShowId = booking.ShowId,
+
+            MovieTitle = booking.Show.Movie.Title,
+            TheaterName = booking.Show.Screen.Theater.TheaterName,
+            ScreenName = booking.Show.Screen.ScreenName,
+            ShowDateTime = booking.Show.ShowDateTime,
+
             BookingDate = booking.BookingDate,
             TotalAmount = booking.TotalAmount,
             Status = booking.Status,
+
             Seats = booking.BookingSeats.Select(bs => new BookingSeatDto
             {
                 ShowSeatId = bs.ShowSeat.ShowSeatId,
@@ -197,6 +212,7 @@ public class BookingService : IBookingService
         return ApiResponse<BookingDetailDto>
             .SuccessResponse(result, "Booking Retrieved Successfully");
     }
+
 
     public async Task<ApiResponse<bool>> DeleteBookingAsync(int bookingId)
     {
