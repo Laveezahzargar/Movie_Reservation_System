@@ -10,4 +10,6 @@ public interface ITheaterService
     Task<ApiResponse<TheaterDetailDto>> CreateTheaterAsync(CreateTheaterDto request);
 
     Task<ApiResponse<List<TheaterScreenDto>>> GetTheaterScreensAsync(int theaterId);
+
+    Task<ApiResponse<List<TheaterListDto>>>GetTheatersByCityAsync(int cityId);
 }

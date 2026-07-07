@@ -58,4 +58,14 @@ public class MovieController : ControllerBase
         var result = await _movieService.DeleteMovieAsync(id);
         return Ok(result);
     }
+
+    //get movies by city
+    [HttpGet("city/{cityId}")]
+    public async Task<IActionResult> GetMoviesByCity(int cityId)
+    {
+        var result = await _movieService
+            .GetMoviesByCityAsync(cityId);
+
+        return Ok(result);
+    }
 }

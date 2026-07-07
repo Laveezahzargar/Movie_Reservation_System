@@ -184,4 +184,39 @@ public class ShowService : IShowService
         return ApiResponse<List<AvailableSeatDto>>
             .SuccessResponse(seats, "Available Seats Retrieved Successfully");
     }
+    public async Task<ApiResponse<List<ShowListDto>>>
+GetShowsByMovieAndCityAsync(
+    int movieId,
+    int cityId)
+    {
+
+        var shows = await _context.Shows
+
+            .Where(s =>
+                s.MovieId == movieId &&
+                s.Theater.CityId == cityId)
+
+            .Select(s => new ShowListDto
+            {
+                ShowId = s.ShowId,
+
+                MovieId = s.MovieId.Value,
+
+                TheaterId = s.TheaterId.Value,
+
+                TheaterName = s.Theater.TheaterName,
+
+                ShowDateTime = s.ShowDateTime,
+
+                ScreenName = s.Screen.ScreenName
+            })
+
+            .ToListAsync();
+
+
+        return ApiResponse<List<ShowListDto>>
+            .SuccessResponse(
+                shows,
+                "Shows retrieved successfully");
+    }
 }

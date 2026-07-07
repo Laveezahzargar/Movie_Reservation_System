@@ -181,4 +181,26 @@ public class MovieService : IMovieService
         return ApiResponse<bool>
             .SuccessResponse(true, "Movie Deleted Successfully");
     }
+    public async Task<ApiResponse<List<MovieListDto>>>
+GetMoviesByCityAsync(int cityId)
+    {
+        var movies = await _context.Movies
+            .Where(m =>
+                m.Shows.Any(s =>
+                    s.Theater.CityId == cityId))
+            .Select(m => new MovieListDto
+            {
+                MovieId = m.MovieId,
+                Title = m.Title,
+                Genre = m.Genre
+            })
+            .Distinct()
+            .ToListAsync();
+
+
+        return ApiResponse<List<MovieListDto>>
+            .SuccessResponse(
+                movies,
+                "Movies fetched successfully");
+    }
 }

@@ -13,4 +13,6 @@ public interface IMovieService
     Task<ApiResponse<MovieDetailDto>> UpdateMovieAsync(int id, UpdateMovieDto request);
 
     Task<ApiResponse<bool>> DeleteMovieAsync(int id);
+
+    Task<ApiResponse<List<MovieListDto>>>GetMoviesByCityAsync(int cityId);
 }

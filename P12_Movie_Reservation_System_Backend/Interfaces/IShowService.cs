@@ -10,4 +10,6 @@ public interface IShowService
     Task<ApiResponse<ShowDetailDto>> CreateShowAsync(CreateShowDto request);
 
     Task<ApiResponse<List<AvailableSeatDto>>> GetAvailableSeatsAsync(int showId);
+
+    Task<ApiResponse<List<ShowListDto>>>GetShowsByMovieAndCityAsync(int movieId,int cityId);
 }

@@ -40,4 +40,15 @@ public class ShowController : ControllerBase
         var result = await _showService.GetAvailableSeatsAsync(showId);
         return Ok(result);
     }
+
+    [HttpGet("movie/{movieId}/city/{cityId}")]
+    public async Task<IActionResult> GetShowsByMovieAndCity(
+    int movieId,
+    int cityId)
+    {
+        var result = await _showService
+            .GetShowsByMovieAndCityAsync(movieId, cityId);
+
+        return Ok(result);
+    }
 }

@@ -40,4 +40,14 @@ public class TheaterController : ControllerBase
         var result = await _theaterService.GetTheaterScreensAsync(id);
         return Ok(result);
     }
+
+
+    [HttpGet("city/{cityId}")]
+    public async Task<IActionResult> GetTheatersByCity(int cityId)
+    {
+        var result = await _theaterService
+            .GetTheatersByCityAsync(cityId);
+
+        return Ok(result);
+    }
 }

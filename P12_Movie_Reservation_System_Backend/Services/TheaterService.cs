@@ -107,4 +107,24 @@ public class TheaterService : ITheaterService
         return ApiResponse<List<TheaterScreenDto>>
             .SuccessResponse(screens, "Screens Retrieved Successfully");
     }
+
+    public async Task<ApiResponse<List<TheaterListDto>>>
+GetTheatersByCityAsync(int cityId)
+    {
+        var theaters = await _context.Theaters
+            .Where(t => t.CityId == cityId)
+            .Select(t => new TheaterListDto
+            {
+                TheaterId = t.TheaterId,
+                TheaterName = t.TheaterName,
+                Location = t.Address
+            })
+            .ToListAsync();
+
+
+        return ApiResponse<List<TheaterListDto>>
+            .SuccessResponse(
+                theaters,
+                "Theaters fetched successfully");
+    }
 }
