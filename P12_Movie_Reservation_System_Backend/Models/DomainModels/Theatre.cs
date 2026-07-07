@@ -11,9 +11,11 @@ public class Theater
     [StringLength(150, MinimumLength = 2)]
     public string TheaterName { get; set; } = string.Empty;
 
-    [Required]
-    [StringLength(255)]
-    public string Location { get; set; } = string.Empty;
+    public string Address { get; set; } = string.Empty;
+
+    public int CityId { get; set; }
+
+    public City City { get; set; } = null!;
 
     // Navigation Property
     public ICollection<Screen> Screens { get; set; } = new List<Screen>();

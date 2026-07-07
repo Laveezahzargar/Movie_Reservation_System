@@ -28,7 +28,7 @@ public class TheaterService : ITheaterService
         {
             TheaterId = t.TheaterId,
             TheaterName = t.TheaterName,
-            Location = t.Location
+            Location = t.Address
         }).ToList();
 
         _logger.LogInformation(
@@ -49,7 +49,7 @@ public class TheaterService : ITheaterService
         var theater = new Theater
         {
             TheaterName = request.TheaterName,
-            Location = request.Location
+            Address = request.Location
         };
 
         await _context.Theaters.AddAsync(theater);
@@ -65,7 +65,7 @@ public class TheaterService : ITheaterService
             {
                 TheaterId = theater.TheaterId,
                 TheaterName = theater.TheaterName,
-                Location = theater.Location
+                Location = theater.Address
             },
             "Theater Created Successfully");
     }

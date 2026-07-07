@@ -17,6 +17,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<Actor> Actors { get; set; }
     public DbSet<MovieActor> MovieActors { get; set; }
 
+
+    public DbSet<City> Cities { get; set; }
     public DbSet<Theater> Theaters { get; set; }
     public DbSet<Screen> Screens { get; set; }
     public DbSet<Seat> Seats { get; set; }
@@ -159,6 +161,14 @@ public class ApplicationDbContext : DbContext
             .HasForeignKey<Ticket>(t => t.BookingId)
             .OnDelete(DeleteBehavior.Cascade);
 
+        //city
+
+        modelBuilder.Entity<Theater>()
+    .HasOne(t => t.City)
+    .WithMany(c => c.Theaters)
+    .HasForeignKey(t => t.CityId)
+    .OnDelete(DeleteBehavior.Restrict);
+
         // ============================================================
         // Unique Constraints
         // ============================================================
@@ -211,7 +221,7 @@ public class ApplicationDbContext : DbContext
             .HasIndex(t => new
             {
                 t.TheaterName,
-                t.Location
+                t.Address
             })
             .IsUnique();
 
