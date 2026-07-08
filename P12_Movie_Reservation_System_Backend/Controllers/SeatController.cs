@@ -58,17 +58,4 @@ public class SeatController : ControllerBase
 
         return Ok(result);
     }
-
-    [Authorize]
-    [HttpPost("seats/confirm")]
-    public async Task<IActionResult> Confirm(ConfirmSeatDto request)
-    {
-        var userId = int.Parse(
-            User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
-
-        var result = await _seatService
-            .ConfirmSeatAsync(request.ShowSeatId, userId);
-
-        return Ok(result);
-    }
 }

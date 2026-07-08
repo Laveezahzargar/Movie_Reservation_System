@@ -12,7 +12,5 @@ public interface ISeatService
 
     Task<ApiResponse<bool>> ReleaseSeatAsync(int showSeatId, int userId);
 
-    Task<ApiResponse<bool>> ConfirmSeatAsync(int showSeatId, int userId);
-
     Task<ApiResponse<List<AvailableSeatDto>>> GetSeatsByShowAsync(int showId);
 }

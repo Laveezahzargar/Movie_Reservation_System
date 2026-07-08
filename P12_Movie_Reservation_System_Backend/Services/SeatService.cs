@@ -130,33 +130,6 @@ public class SeatService : ISeatService
         return ApiResponse<bool>
             .SuccessResponse(true, "Seat released.");
     }
-    public async Task<ApiResponse<bool>> ConfirmSeatAsync(
-    int showSeatId,
-    int userId)
-    {
-        var seat = await _context.ShowSeats
-            .FirstOrDefaultAsync(s => s.ShowSeatId == showSeatId);
-
-        if (seat == null)
-            return ApiResponse<bool>.FailureResponse("Seat not found.");
-
-        if (seat.ReservedByUserId != userId)
-            return ApiResponse<bool>
-                .FailureResponse("Seat not reserved by you.");
-
-        if (seat.ReservedUntil < DateTime.UtcNow)
-            return ApiResponse<bool>
-                .FailureResponse("Reservation expired.");
-
-        seat.Status = ShowSeatStatus.Booked;
-        seat.ReservedByUserId = null;
-        seat.ReservedUntil = null;
-
-        await _context.SaveChangesAsync();
-
-        return ApiResponse<bool>
-            .SuccessResponse(true, "Seat confirmed.");
-    }
     public async Task<ApiResponse<List<AvailableSeatDto>>> GetSeatsByShowAsync(int showId)
     {
         _logger.LogInformation(

@@ -20,110 +20,129 @@ public class BookingService : IBookingService
     }
 
     public async Task<ApiResponse<BookingDetailDto>> CreateBookingAsync(
-        int userId,
-        CreateBookingDto request)
+     int userId,
+     CreateBookingDto request)
     {
-        _logger.LogInformation(
-            "Creating booking for UserId {UserId}, ShowId {ShowId} with {SeatCount} seats.",
-            userId,
-            request.ShowId,
-            request.ShowSeatIds.Count);
+        using var transaction = await _context.Database.BeginTransactionAsync();
 
-        var show = await _context.Shows
-            .FirstOrDefaultAsync(s => s.ShowId == request.ShowId);
-
-        if (show == null)
+        try
         {
-            _logger.LogWarning(
-                "Booking creation failed. ShowId {ShowId} not found.",
-                request.ShowId);
+            _logger.LogInformation(
+                "Creating booking for UserId {UserId}, ShowId {ShowId} with {SeatCount} seats.",
+                userId,
+                request.ShowId,
+                request.ShowSeatIds.Count);
 
-            return ApiResponse<BookingDetailDto>
-                .FailureResponse("Show not found");
-        }
+            var show = await _context.Shows
+                .FirstOrDefaultAsync(s => s.ShowId == request.ShowId);
 
-        var showSeats = await _context.ShowSeats
-            .Include(ss => ss.Seat)
-            .Where(ss =>
-                request.ShowSeatIds.Contains(ss.ShowSeatId) &&
-                ss.ShowId == request.ShowId)
-            .ToListAsync();
+            if (show == null)
+                return ApiResponse<BookingDetailDto>
+                    .FailureResponse("Show not found");
 
-        if (showSeats.Count != request.ShowSeatIds.Count)
-        {
-            _logger.LogWarning(
-                "Booking creation failed. One or more ShowSeatIds are invalid for ShowId {ShowId}.",
-                request.ShowId);
+            var showSeats = await _context.ShowSeats
+                .Include(ss => ss.Seat)
+                .Where(ss =>
+                    request.ShowSeatIds.Contains(ss.ShowSeatId) &&
+                    ss.ShowId == request.ShowId)
+                .ToListAsync();
 
-            return ApiResponse<BookingDetailDto>
-                .FailureResponse("One or more seats are invalid");
-        }
+            if (showSeats.Count != request.ShowSeatIds.Count)
+                return ApiResponse<BookingDetailDto>
+                    .FailureResponse("One or more seats are invalid.");
 
-        if (showSeats.Any(s => s.Status != ShowSeatStatus.Available))
-        {
-            _logger.LogWarning(
-                "Booking creation failed. One or more seats are already booked for ShowId {ShowId}.",
-                request.ShowId);
+            foreach (var seat in showSeats)
+            {
+                if (seat.Status != ShowSeatStatus.Reserved)
+                {
+                    return ApiResponse<BookingDetailDto>
+                        .FailureResponse("One or more seats are not reserved.");
+                }
 
-            return ApiResponse<BookingDetailDto>
-                .FailureResponse("One or more seats are already booked");
-        }
+                if (seat.ReservedByUserId != userId)
+                {
+                    return ApiResponse<BookingDetailDto>
+                        .FailureResponse("One or more seats are reserved by another user.");
+                }
 
-        decimal seatPrice = 250m;
+                if (seat.ReservedUntil == null ||
+                    seat.ReservedUntil < DateTime.UtcNow)
+                {
+                    return ApiResponse<BookingDetailDto>
+                        .FailureResponse("Seat reservation expired.");
+                }
+            }
 
-        var booking = new Booking
-        {
-            UserId = userId,
-            ShowId = request.ShowId,
-            MovieId = show.MovieId!.Value,
-            TheaterId = show.TheaterId!.Value,
-            ScreenId = show.ScreenId!.Value,
-            BookingDate = DateTime.UtcNow,
-            Status = "Confirmed",
-            TotalAmount = seatPrice * request.ShowSeatIds.Count
-        };
+            decimal seatPrice = 250m;
 
-        await _context.Bookings.AddAsync(booking);
-        await _context.SaveChangesAsync();
+            var booking = new Booking
+            {
+                UserId = userId,
+                ShowId = request.ShowId,
+                MovieId = show.MovieId!.Value,
+                TheaterId = show.TheaterId!.Value,
+                ScreenId = show.ScreenId!.Value,
+                BookingDate = DateTime.UtcNow,
+                Status = "Confirmed",
+                TotalAmount = seatPrice * request.ShowSeatIds.Count
+            };
 
-        foreach (var showSeat in showSeats)
-        {
-            await _context.BookingSeats.AddAsync(new BookingSeat
+            await _context.Bookings.AddAsync(booking);
+            await _context.SaveChangesAsync();
+
+            foreach (var showSeat in showSeats)
+            {
+                await _context.BookingSeats.AddAsync(new BookingSeat
+                {
+                    BookingId = booking.BookingId,
+                    ShowSeatId = showSeat.ShowSeatId
+                });
+
+                showSeat.Status = ShowSeatStatus.Booked;
+                showSeat.ReservedByUserId = null;
+                showSeat.ReservedUntil = null;
+            }
+
+            await _context.SaveChangesAsync();
+
+            await transaction.CommitAsync();
+
+            _logger.LogInformation(
+                "Booking {BookingId} created successfully.",
+                booking.BookingId);
+
+            var response = new BookingDetailDto
             {
                 BookingId = booking.BookingId,
-                ShowSeatId = showSeat.ShowSeatId
-            });
+                UserId = booking.UserId,
+                ShowId = booking.ShowId,
+                BookingDate = booking.BookingDate,
+                TotalAmount = booking.TotalAmount,
+                Status = booking.Status,
+                Seats = showSeats.Select(s => new BookingSeatDto
+                {
+                    ShowSeatId = s.ShowSeatId,
+                    SeatId = s.SeatId,
+                    SeatNumber = s.Seat.Number,
+                    SeatType = s.Seat.Type.ToString()
+                }).ToList()
+            };
 
-            showSeat.Status = ShowSeatStatus.Booked;
+            return ApiResponse<BookingDetailDto>
+                .SuccessResponse(response, "Booking Created Successfully");
         }
-
-        await _context.SaveChangesAsync();
-
-        _logger.LogInformation(
-            "Booking created successfully. BookingId {BookingId}, UserId {UserId}, TotalAmount {TotalAmount}.",
-            booking.BookingId,
-            booking.UserId,
-            booking.TotalAmount);
-
-        var response = new BookingDetailDto
+        catch (Exception ex)
         {
-            BookingId = booking.BookingId,
-            UserId = booking.UserId,
-            ShowId = booking.ShowId,
-            BookingDate = booking.BookingDate,
-            TotalAmount = booking.TotalAmount,
-            Status = booking.Status,
-            Seats = showSeats.Select(s => new BookingSeatDto
-            {
-                ShowSeatId = s.ShowSeatId,
-                SeatId = s.SeatId,
-                SeatNumber = s.Seat.Number,
-                SeatType = s.Seat.Type.ToString()
-            }).ToList()
-        };
+            await transaction.RollbackAsync();
 
-        return ApiResponse<BookingDetailDto>
-            .SuccessResponse(response, "Booking Created Successfully");
+            _logger.LogError(
+                ex,
+                "Error while creating booking for UserId {UserId}.",
+                userId);
+
+            return ApiResponse<BookingDetailDto>
+                .FailureResponse("Booking could not be completed.");
+        }
     }
 
     public async Task<ApiResponse<List<BookingListDto>>> GetMyBookingsAsync(int userId)
