@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using P12_Movie_Reservation_System_Backend.DTOs.Auth;
 using P12_Movie_Reservation_System_Backend.Interfaces;
@@ -32,6 +33,15 @@ public class AuthController : ControllerBase
 
         if (!result.Success)
             return Unauthorized(result);
+
+        return Ok(result);
+    }
+
+    [HttpPost("logout")]
+    [Authorize]
+    public async Task<IActionResult> Logout()
+    {
+        var result = await _authService.LogoutAsync();
 
         return Ok(result);
     }

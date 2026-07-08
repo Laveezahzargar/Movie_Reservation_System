@@ -25,8 +25,31 @@ public class Movie
     public string Genre { get; set; } = string.Empty;
 
     [Required]
+    [StringLength(50)]
+    public string Language { get; set; } = string.Empty;
+
+    [Required]
     [DataType(DataType.Date)]
     public DateTime ReleaseDate { get; set; }
+    [Range(0, 10)]
+    public decimal Rating { get; set; }
+
+    [StringLength(20)]
+    public string Certificate { get; set; } = "U/A";
+
+    [StringLength(500)]
+    public string? PosterUrl { get; set; }
+
+    [StringLength(500)]
+    public string? TrailerUrl { get; set; }
+
+    [StringLength(200)]
+    public string Director { get; set; } = string.Empty;
+
+    [Required]
+    public bool IsActive { get; set; } = true;
+
+    public bool IsFeatured { get; set; } = false;
 
     // Navigation properties
     public ICollection<Show> Shows { get; set; } = new List<Show>();

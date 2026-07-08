@@ -127,4 +127,15 @@ public class AuthService : IAuthService
         return ApiResponse<LoginResponseDto>
             .SuccessResponse(response, "Login successful.");
     }
+
+    public async Task<ApiResponse<bool>> LogoutAsync()
+    {
+        _logger.LogInformation("User logged out successfully.");
+
+        await Task.CompletedTask;
+
+        return ApiResponse<bool>.SuccessResponse(
+            true,
+            "Logout successful.");
+    }
 }
