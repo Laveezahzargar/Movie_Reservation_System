@@ -2,6 +2,7 @@
 using P12_Movie_Reservation_System_Backend.Common;
 using P12_Movie_Reservation_System_Backend.Data.ApplicationDbContext;
 using P12_Movie_Reservation_System_Backend.DTOs.Seat;
+using P12_Movie_Reservation_System_Backend.DTOs.Show;
 using P12_Movie_Reservation_System_Backend.Enums;
 using P12_Movie_Reservation_System_Backend.Interfaces;
 using P12_Movie_Reservation_System_Backend.Models.DomainModels;
@@ -75,5 +76,115 @@ public class SeatService : ISeatService
                 ScreenId = seat.ScreenId
             },
             "Seat Created Successfully");
+    }
+    public async Task<ApiResponse<bool>> ReserveSeatAsync(
+    int showSeatId,
+    int userId)
+    {
+        var seat = await _context.ShowSeats
+            .FirstOrDefaultAsync(s => s.ShowSeatId == showSeatId);
+
+        if (seat == null)
+            return ApiResponse<bool>.FailureResponse("Seat not found.");
+
+        if (seat.Status == ShowSeatStatus.Booked)
+            return ApiResponse<bool>.FailureResponse("Seat already booked.");
+
+        if (seat.Status == ShowSeatStatus.Reserved &&
+            seat.ReservedUntil > DateTime.UtcNow &&
+            seat.ReservedByUserId != userId)
+        {
+            return ApiResponse<bool>
+                .FailureResponse("Seat already reserved.");
+        }
+
+        seat.Status = ShowSeatStatus.Reserved;
+        seat.ReservedByUserId = userId;
+        seat.ReservedUntil = DateTime.UtcNow.AddMinutes(5);
+
+        await _context.SaveChangesAsync();
+
+        return ApiResponse<bool>
+            .SuccessResponse(true, "Seat reserved.");
+    }
+    public async Task<ApiResponse<bool>> ReleaseSeatAsync(
+    int showSeatId,
+    int userId)
+    {
+        var seat = await _context.ShowSeats
+            .FirstOrDefaultAsync(s => s.ShowSeatId == showSeatId);
+
+        if (seat == null)
+            return ApiResponse<bool>.FailureResponse("Seat not found.");
+
+        if (seat.ReservedByUserId != userId)
+            return ApiResponse<bool>
+                .FailureResponse("You don't own this reservation.");
+
+        seat.Status = ShowSeatStatus.Available;
+        seat.ReservedByUserId = null;
+        seat.ReservedUntil = null;
+
+        await _context.SaveChangesAsync();
+
+        return ApiResponse<bool>
+            .SuccessResponse(true, "Seat released.");
+    }
+    public async Task<ApiResponse<bool>> ConfirmSeatAsync(
+    int showSeatId,
+    int userId)
+    {
+        var seat = await _context.ShowSeats
+            .FirstOrDefaultAsync(s => s.ShowSeatId == showSeatId);
+
+        if (seat == null)
+            return ApiResponse<bool>.FailureResponse("Seat not found.");
+
+        if (seat.ReservedByUserId != userId)
+            return ApiResponse<bool>
+                .FailureResponse("Seat not reserved by you.");
+
+        if (seat.ReservedUntil < DateTime.UtcNow)
+            return ApiResponse<bool>
+                .FailureResponse("Reservation expired.");
+
+        seat.Status = ShowSeatStatus.Booked;
+        seat.ReservedByUserId = null;
+        seat.ReservedUntil = null;
+
+        await _context.SaveChangesAsync();
+
+        return ApiResponse<bool>
+            .SuccessResponse(true, "Seat confirmed.");
+    }
+    public async Task<ApiResponse<List<AvailableSeatDto>>> GetSeatsByShowAsync(int showId)
+    {
+        _logger.LogInformation(
+            "Fetching seats for ShowId {ShowId}.",
+            showId);
+
+        var showExists = await _context.Shows
+            .AnyAsync(s => s.ShowId == showId);
+
+        if (!showExists)
+        {
+            return ApiResponse<List<AvailableSeatDto>>
+                .FailureResponse("Show not found");
+        }
+
+        var seats = await _context.ShowSeats
+            .Where(s => s.ShowId == showId)
+            .Select(s => new AvailableSeatDto
+            {
+                ShowSeatId = s.ShowSeatId,
+                SeatId = s.SeatId,
+                SeatNumber = s.Seat.Number,
+                SeatType = s.Seat.Type.ToString(),
+                Status = s.Status
+            })
+            .ToListAsync();
+
+        return ApiResponse<List<AvailableSeatDto>>
+            .SuccessResponse(seats, "Seats retrieved successfully.");
     }
 }

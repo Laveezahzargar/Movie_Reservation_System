@@ -145,49 +145,7 @@ public class ShowService : IShowService
             },
             "Show Created Successfully");
     }
-
-    public async Task<ApiResponse<List<AvailableSeatDto>>> GetAvailableSeatsAsync(int showId)
-    {
-        _logger.LogInformation(
-            "Fetching available seats for ShowId {ShowId}.",
-            showId);
-
-        var showExists = await _context.Shows
-            .AnyAsync(s => s.ShowId == showId);
-
-        if (!showExists)
-        {
-            _logger.LogWarning(
-                "Show with ShowId {ShowId} was not found.",
-                showId);
-
-            return ApiResponse<List<AvailableSeatDto>>
-                .FailureResponse("Show not found");
-        }
-
-        var seats = await _context.ShowSeats
-            .Where(ss => ss.ShowId == showId)
-            .Select(ss => new AvailableSeatDto
-            {
-                ShowSeatId = ss.ShowSeatId,
-                SeatId = ss.Seat.SeatId,
-                SeatNumber = ss.Seat.Number,
-                SeatType = ss.Seat.Type.ToString(),
-                Status = ss.Status
-            }).ToListAsync();
-
-        _logger.LogInformation(
-            "Retrieved {AvailableSeatCount} available seats for ShowId {ShowId}.",
-            seats.Count,
-            showId);
-
-        return ApiResponse<List<AvailableSeatDto>>
-            .SuccessResponse(seats, "Available Seats Retrieved Successfully");
-    }
-    public async Task<ApiResponse<List<ShowListDto>>>
-GetShowsByMovieAndCityAsync(
-    int movieId,
-    int cityId)
+    public async Task<ApiResponse<List<ShowListDto>>>GetShowsByMovieAndCityAsync( int movieId, int cityId)
     {
 
         var shows = await _context.Shows
@@ -218,5 +176,85 @@ GetShowsByMovieAndCityAsync(
             .SuccessResponse(
                 shows,
                 "Shows retrieved successfully");
+    }
+    public async Task<ApiResponse<List<ShowListDto>>> GetShowsByMovieAsync(int movieId)
+    {
+        _logger.LogInformation(
+            "Fetching shows for MovieId {MovieId}.",
+            movieId);
+
+        var movieExists = await _context.Movies
+            .AnyAsync(m => m.MovieId == movieId);
+
+        if (!movieExists)
+        {
+            _logger.LogWarning(
+                "MovieId {MovieId} not found.",
+                movieId);
+
+            return ApiResponse<List<ShowListDto>>
+                .FailureResponse("Movie not found.");
+        }
+
+        var shows = await _context.Shows
+            .Where(s => s.MovieId == movieId)
+            .Include(s => s.Movie)
+            .Include(s => s.Screen)
+                .ThenInclude(sc => sc.Theater)
+            .OrderBy(s => s.ShowDateTime)
+            .Select(s => new ShowListDto
+            {
+                ShowId = s.ShowId,
+                MovieId = s.MovieId!.Value,
+                MovieTitle = s.Movie!.Title,
+                TheaterId = s.Screen.Theater.TheaterId,
+                TheaterName = s.Screen.Theater.TheaterName,
+                ScreenId = s.ScreenId!.Value,
+                ScreenName = s.Screen.ScreenName,
+                ShowDateTime = s.ShowDateTime
+            })
+            .ToListAsync();
+
+        _logger.LogInformation(
+            "Retrieved {ShowCount} shows for MovieId {MovieId}.",
+            shows.Count,
+            movieId);
+
+        return ApiResponse<List<ShowListDto>>
+            .SuccessResponse(shows, "Shows retrieved successfully.");
+    }
+    public async Task<ApiResponse<List<DateTime>>> GetShowDatesByMovieAsync(int movieId)
+    {
+        _logger.LogInformation(
+            "Fetching available show dates for MovieId {MovieId}.",
+            movieId);
+
+        var movieExists = await _context.Movies
+            .AnyAsync(m => m.MovieId == movieId);
+
+        if (!movieExists)
+        {
+            _logger.LogWarning(
+                "MovieId {MovieId} not found.",
+                movieId);
+
+            return ApiResponse<List<DateTime>>
+                .FailureResponse("Movie not found.");
+        }
+
+        var dates = await _context.Shows
+            .Where(s => s.MovieId == movieId)
+            .OrderBy(s => s.ShowDateTime)
+            .Select(s => s.ShowDateTime.Date)
+            .Distinct()
+            .ToListAsync();
+
+        _logger.LogInformation(
+            "Retrieved {DateCount} unique show dates for MovieId {MovieId}.",
+            dates.Count,
+            movieId);
+
+        return ApiResponse<List<DateTime>>
+            .SuccessResponse(dates, "Show dates retrieved successfully.");
     }
 }

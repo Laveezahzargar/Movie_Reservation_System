@@ -22,6 +22,11 @@ public class ShowSeat
 
     [Required]
     public ShowSeatStatus Status { get; set; } = ShowSeatStatus.Available;
+    public int? ReservedByUserId { get; set; }
+
+    public User? ReservedByUser { get; set; }
+
+    public DateTime? ReservedUntil { get; set; }
 
     // Navigation Property
     public ICollection<BookingSeat> BookingSeats { get; set; } = new List<BookingSeat>();

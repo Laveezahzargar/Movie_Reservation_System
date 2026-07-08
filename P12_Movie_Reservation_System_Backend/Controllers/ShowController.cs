@@ -33,14 +33,6 @@ public class ShowController : ControllerBase
         return Ok(result);
     }
 
-    // GET /api/shows/{showId}/available-seats
-    [HttpGet("{showId}/available-seats")]
-    public async Task<IActionResult> GetAvailableSeats(int showId)
-    {
-        var result = await _showService.GetAvailableSeatsAsync(showId);
-        return Ok(result);
-    }
-
     [HttpGet("movie/{movieId}/city/{cityId}")]
     public async Task<IActionResult> GetShowsByMovieAndCity(
     int movieId,
@@ -49,6 +41,21 @@ public class ShowController : ControllerBase
         var result = await _showService
             .GetShowsByMovieAndCityAsync(movieId, cityId);
 
+        return Ok(result);
+    }
+    // GET /api/shows/movie/{movieId}
+    [HttpGet("movie/{movieId}")]
+    public async Task<IActionResult> GetShowsByMovie(int movieId)
+    {
+        var result = await _showService.GetShowsByMovieAsync(movieId);
+        return Ok(result);
+    }
+
+    // GET /api/shows/movie/{movieId}/dates
+    [HttpGet("movie/{movieId}/dates")]
+    public async Task<IActionResult> GetShowDatesByMovie(int movieId)
+    {
+        var result = await _showService.GetShowDatesByMovieAsync(movieId);
         return Ok(result);
     }
 }
