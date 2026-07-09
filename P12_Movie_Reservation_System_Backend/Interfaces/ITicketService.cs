@@ -7,5 +7,5 @@ public interface ITicketService
 {
     Task<ApiResponse<TicketDetailDto>> GetTicketByBookingIdAsync(int bookingId);
 
-    Task<ApiResponse<string>> DownloadTicketAsync(int bookingId);
+    Task<byte[]> DownloadTicketAsync(int bookingId);
 }

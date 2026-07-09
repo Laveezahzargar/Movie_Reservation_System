@@ -24,9 +24,16 @@ public class TicketController : ControllerBase
 
     // GET: /api/tickets/{bookingId}/download
     [HttpGet("{bookingId}/download")]
-    public async Task<IActionResult> Download(int bookingId)
+    public async Task<IActionResult> DownloadTicket(int bookingId)
     {
-        var result = await _ticketService.DownloadTicketAsync(bookingId);
-        return Ok(result);
+        var pdf = await _ticketService.DownloadTicketAsync(bookingId);
+
+        if (pdf == null)
+            return NotFound();
+
+        return File(
+            pdf,
+            "application/pdf",
+            $"Ticket_{bookingId}.pdf");
     }
 }
