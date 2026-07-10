@@ -4,6 +4,7 @@ using P12_Movie_Reservation_System_Backend.Interfaces;
 
 namespace P12_Movie_Reservation_System_Backend.Controllers;
 
+
 [ApiController]
 [Route("api/tickets")]
 [Authorize]
