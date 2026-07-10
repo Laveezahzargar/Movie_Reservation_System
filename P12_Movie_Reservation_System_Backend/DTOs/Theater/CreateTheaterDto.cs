@@ -11,4 +11,7 @@ public class CreateTheaterDto
     [Required]
     [StringLength(255, MinimumLength = 5)]
     public string Location { get; set; } = string.Empty;
+
+    [Required]
+    public int CityId { get; set; }
 }

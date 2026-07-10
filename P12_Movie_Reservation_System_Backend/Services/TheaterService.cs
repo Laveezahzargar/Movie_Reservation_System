@@ -49,7 +49,8 @@ public class TheaterService : ITheaterService
         var theater = new Theater
         {
             TheaterName = request.TheaterName,
-            Address = request.Location
+            Address = request.Location,
+            CityId = request.CityId
         };
 
         await _context.Theaters.AddAsync(theater);

@@ -75,10 +75,11 @@ public class ShowService : IShowService
                 .FailureResponse("Movie not found");
         }
 
-        var screenExists = await _context.Screens
-            .AnyAsync(s => s.ScreenId == request.ScreenId);
+        var screen = await _context.Screens
+     .Include(s => s.Theater)
+     .FirstOrDefaultAsync(s => s.ScreenId == request.ScreenId);
 
-        if (!screenExists)
+        if (screen == null)
         {
             _logger.LogWarning(
                 "Show creation failed. ScreenId {ScreenId} not found.",
@@ -92,6 +93,7 @@ public class ShowService : IShowService
         {
             MovieId = request.MovieId,
             ScreenId = request.ScreenId,
+            TheaterId = screen.TheaterId,
             ShowDateTime = request.ShowDateTime
         };
 
@@ -136,14 +138,21 @@ public class ShowService : IShowService
             show.ShowId);
 
         return ApiResponse<ShowDetailDto>.SuccessResponse(
-            new ShowDetailDto
-            {
-                ShowId = show.ShowId,
-                MovieId = (int)show.MovieId,
-                ScreenId = (int)show.ScreenId,
-                ShowDateTime = show.ShowDateTime
-            },
-            "Show Created Successfully");
+    new ShowDetailDto
+    {
+        ShowId = show.ShowId,
+        MovieId = show.MovieId.Value,
+        MovieTitle = show.Movie.Title,         
+
+        ScreenId = show.ScreenId.Value,
+        ScreenName = show.Screen.ScreenName,    
+
+        TheaterId = show.Screen.TheaterId,
+        TheaterName = show.Screen.Theater.TheaterName,
+
+        ShowDateTime = show.ShowDateTime
+    },
+    "Show Created Successfully");
     }
     public async Task<ApiResponse<List<ShowListDto>>>GetShowsByMovieAndCityAsync( int movieId, int cityId)
     {

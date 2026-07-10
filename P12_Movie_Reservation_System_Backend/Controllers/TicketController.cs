@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using P12_Movie_Reservation_System_Backend.Interfaces;
 
 namespace P12_Movie_Reservation_System_Backend.Controllers;
 
 [ApiController]
 [Route("api/tickets")]
+[Authorize]
 public class TicketController : ControllerBase
 {
     private readonly ITicketService _ticketService;
